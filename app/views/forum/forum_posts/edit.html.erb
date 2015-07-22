@@ -1,0 +1,39 @@
+<% content_for :header do %>
+  <%= render 'shared/form_errors', :errors => @post.errors %>
+<h1><%= @post.forum.name %></h1>
+<h2>Edit Message</h2>
+<% end %>
+
+<%= form_for @post do |f| %>
+
+  <div class="form-group">
+    <%= f.label :subject %>
+    <%= f.text_field :subject, :class => "form-control", :placeholder => "Enter subject for your post"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :post_body %>
+    <%= f.text_area :post_body, :class => "form-control", :rows => 10, :placeholder => "Write your post conents here" %>
+  </div>
+  <% if current_user.is_admin? %>
+
+    <div class="form-group">
+      <%= f.check_box :sticky %>
+      <%= f.label :sticky, "Make this post sticky?" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.check_box :locked %>
+      <%= f.label :locked, "Block non-administrators from replying to this post?" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.check_box :email_users %>
+      <%= f.label :email_users, "Email site users to inform them of this post?" %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+  <%= f.submit :class => "btn btn-primary form-control" %>
+  </div>
+<% end %>

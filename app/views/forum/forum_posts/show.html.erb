@@ -1,0 +1,37 @@
+<% content_for :header do %>
+<h1><%= @post.forum.name %></h1>
+<h2><%= @post.subject %></h2>
+<% end %>
+
+<div class="row-fluid post_container">
+  <div class="col-md-10 col-sm-8 post_body">
+    <p class="post_author">Posted by <%= @post.posted_by %> on <%= @post.created_at %></p>
+    <p><%= @post.post_body %></p>
+  </div>
+
+  <div class="col-md-2 col-sm-4 post_details">
+    <ul class="list-group">
+      <% if @post.updated_at != @post.created_at %>
+        <li class="list-group-item">Updated <%= @post.updated_at %></li>
+      <% end %>
+
+      <li class="list-group-item">Attachments</li>
+
+      <% if current_user.is_admin? || !@post.locked %>
+        <li class="list-group-item"><%= link_to "Reply", new_forum_forum_reply_path(:post_id => @post.id) %></li>
+      <% else %>
+        <li class="list-group-item">Post Locked</li>
+      <% end %>
+
+      <% if current_user.is_admin? || (current_user && (@post.user == current_user)) %>
+        <li class="list-group-item"><%= link_to "Edit Post", edit_forum_forum_post_path(@post) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% @post.forum_replies.each do |reply| %>
+<div class="row-fluid">
+  <p><%= reply.post_body %></p>
+</div>
+<% end %>

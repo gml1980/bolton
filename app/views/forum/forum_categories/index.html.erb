@@ -8,6 +8,7 @@
 		<tr>
 			<th>Category</th>
 			<th>Description</th>
+      <th>Forum Count</th>
 			<th>Position</th>
 			<th>Status</th>
 			<th>Actions</th>
@@ -17,6 +18,7 @@
 		<tr>
 			<td><%= link_to cat.name, forum_forum_category_path(cat) %></td>
 			<td><%= cat.description %></td>
+      <td><%= cat.forums.count %></td>
 			<td><%= cat.position %></td>
 			<td><%= cat.status.humanize %></td>
 			<td><%= link_to "Edit", edit_forum_forum_category_path(cat) %></td>
@@ -28,7 +30,7 @@
 	<% end %>
 
 	<div>
-	<%= link_to "Create new category", new_forum_forum_category_path %>
+	<%= link_to "Create new category", new_forum_forum_category_path, :class => "btn btn-primary" %>
 	</div>
 <% else %>
 	<% if @categories.size > 0 %>

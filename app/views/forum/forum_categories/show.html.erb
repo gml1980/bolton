@@ -1,6 +1,6 @@
 <% content_for :header do %>
-<h1>Forum Category : <%= @category.name %></h1>
-<h2>Forum List</h2>
+<h1><%= @category.name %></h1>
+<h2>Forums</h2>
 <% end %>
 
 <% if @forums.blank? %>
@@ -10,6 +10,8 @@
 		<tr>
 			<th>Name</th>
 			<th>Description</th>
+        <th>Posts</th>
+        <th>Last Post</th>
 			<% if current_user.is_admin? %>
 				<th>Position</th>
 				<th>Status</th>
@@ -20,6 +22,8 @@
 			<tr>
 			  <td><%= link_to forum.name, forum_forum_path(forum) %></td>
 				<td><%= forum.description %></td>
+        <td><%= forum.forum_posts.count %></td>
+        <td><%= forum.forum_posts.order(created_at: :desc).first.created_at unless forum.forum_posts.count == 0 %></td>
 				<% if current_user.is_admin? %>
 					<td><%= forum.position %></td>
 					<td><%= forum.status.humanize %></td>
@@ -31,5 +35,5 @@
 <% end %>
 
 <% if current_user.is_admin? %>
-  <%= link_to "Create Forum", new_forum_forum_path(:category_id => @category.id) %>
+  <%= link_to "Create Forum", new_forum_forum_path(:category_id => @category.id), :class => "btn btn-primary" %>
 <% end %>

@@ -12,13 +12,13 @@ class Forum::ForumCategoriesController < ApplicationController
 
 	def new
 		@category = Forum::ForumCategory.new
-  	add_breadcrumb "Create Category", :new_forum_forum_category_path
+  	add_breadcrumb "Create", :new_forum_forum_category_path
 	end
 
 	def edit
 		@category = Forum::ForumCategory.find(params[:id])
   	add_breadcrumb @category.name, @category
-  	add_breadcrumb "Edit Category", edit_forum_forum_category_path(@category)
+  	add_breadcrumb "Edit", edit_forum_forum_category_path(@category)
 	end
 
 	def show

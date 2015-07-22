@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+.post_body {
+}
+
+.post_details {
+}
+
+.post_container {
+   border: 1px solid grey;
+   padding: 10px;
+   overflow: auto;
+}
+
+.post_author {
+  display: inline-block;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #E0E0E0;
+  margin-bottom: 6px;
+}

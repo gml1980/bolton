@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :forum do
-    resources :forum_categories, :forums, :forum_posts
+    resources :forum_categories, :forums, :forum_posts, :forum_replies
   end
 end

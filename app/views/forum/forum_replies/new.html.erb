@@ -1,0 +1,25 @@
+<% content_for :header do %>
+<h1><%= @post.forum.name %></h1>
+<h2><%= @post.subject %></h2>
+<% end %>
+
+<%= form_for @reply do |f| %>
+  <%= render 'shared/form_errors', :errors => @reply.errors %>
+
+  <%= f.hidden_field :post_id, :value => @post.id %>
+
+  <div class="form-group">
+    <%= f.label :post_body, "Reply" %>
+    <%= f.text_area :post_body, :class => "form-control", :rows => 10, :placeholder => "Write your reply here" %>
+  </div>
+  <% if current_user.is_admin? %>
+    <div class="form-group">
+      <%= f.check_box :email_users %>
+      <%= f.label :email_users, "Email site users to inform them of this reply?" %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+  <%= f.submit :class => "btn btn-primary form-control" %>
+  </div>
+<% end %>

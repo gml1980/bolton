@@ -19,7 +19,7 @@ class Forum::ForumsController < ApplicationController
 			category = Forum::ForumCategory.find(params[:category_id])
 
   	  add_breadcrumb category.name, category
-  	  add_breadcrumb "Create Forum", new_forum_forum_path(@forum)
+  	  add_breadcrumb "Create", new_forum_forum_path(@forum)
 			@forum = category.forums.new
 		end
 	end
@@ -70,7 +70,7 @@ class Forum::ForumsController < ApplicationController
 		@forum = Forum::Forum.find(params[:id])
   	add_breadcrumb @forum.forum_category.name, @forum.forum_category
   	add_breadcrumb @forum.name, @forum
-  	add_breadcrumb "Edit Forum", edit_forum_forum_path(@forum)
+  	add_breadcrumb "Edit", edit_forum_forum_path(@forum)
 	end
 
 	private

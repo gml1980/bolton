@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722113436) do
+ActiveRecord::Schema.define(version: 20150722192421) do
 
   create_table "forum_categories", force: true do |t|
     t.text     "name",                      null: false
@@ -31,9 +31,25 @@ ActiveRecord::Schema.define(version: 20150722113436) do
     t.boolean  "email_users", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "forum_posts", ["forum_id"], name: "index_forum_posts_on_forum_id"
+  add_index "forum_posts", ["user_id"], name: "index_forum_posts_on_user_id"
+
+  create_table "forum_replies", force: true do |t|
+    t.string   "post_body",                        null: false
+    t.integer  "forum_post_id",                    null: false
+    t.integer  "forum_replies_id"
+    t.boolean  "email_users",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "forum_replies", ["forum_post_id"], name: "index_forum_replies_on_forum_post_id"
+  add_index "forum_replies", ["forum_replies_id"], name: "index_forum_replies_on_forum_replies_id"
+  add_index "forum_replies", ["user_id"], name: "index_forum_replies_on_user_id"
 
   create_table "forums", force: true do |t|
     t.text     "name",                            null: false

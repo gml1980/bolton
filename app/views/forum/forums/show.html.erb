@@ -1,23 +1,25 @@
 <% content_for :header do %>
-<h1>Forum: <%= @forum.name %></h1>
+<h1><%= @forum.forum_category.name %> / <%= @forum.name %></h1>
 <h2>Posts</h2>
 <% end %>
 
 <table class="table table-striped">
 	<tr>
 		<th>Subject</th>
-		<th>Posted</th>
+    <th>Posted By</th>
+		<th>Posted At</th>
 		<th>Replies</th>
 		<th>Last Reply</th>
 	</tr>
 
 	<% if @forum.forum_posts.count > 0 %>
-	  <% @forum.forum_posts.each do |post| %>
+	  <% @forum.forum_posts.order(created_at: :desc).each do |post| %>
 			<tr>
 			  <td><%= link_to post.subject, forum_forum_post_path(post) %></td>
-				<td>TODO</td>
-				<td>TODO</td>
-				<td>TODO</td>
+        <td><%= post.posted_by %></td>
+				<td><%= post.created_at %></td>
+				<td><%= post.forum_replies.count %></td>
+				<td><%= post.created_at %></td>
 			</tr>
 	  <% end %>
   <% else %>
