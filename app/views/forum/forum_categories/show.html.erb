@@ -1,0 +1,35 @@
+<% content_for :header do %>
+<h1>Forum Category : <%= @category.name %></h1>
+<h2>Forum List</h2>
+<% end %>
+
+<% if @forums.blank? %>
+  <p>No forums currently exist for this category.</P>
+<% else %>
+	<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<% if current_user.is_admin? %>
+				<th>Position</th>
+				<th>Status</th>
+				<th>Actions</th>
+			<% end %>
+		</tr>
+	  <% @forums.each do |forum| %>
+			<tr>
+			  <td><%= link_to forum.name, forum_forum_path(forum) %></td>
+				<td><%= forum.description %></td>
+				<% if current_user.is_admin? %>
+					<td><%= forum.position %></td>
+					<td><%= forum.status.humanize %></td>
+					<td><%= link_to "Edit", edit_forum_forum_path(forum) %></td>
+				<% end %>
+			</tr>
+	  <% end %>
+	</table>
+<% end %>
+
+<% if current_user.is_admin? %>
+  <%= link_to "Create Forum", new_forum_forum_path(:category_id => @category.id) %>
+<% end %>

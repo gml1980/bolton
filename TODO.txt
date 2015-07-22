@@ -1,0 +1,6 @@
+- Breadcrumbs for admin / forums.
+- Email options for subscribers.
+- Email options for forums (email all when new post to forum).
+- Limited scope forums.
+- Limit replies on forum posts (admins only?).
+- Home page.

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bolton</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="row">
+	<%= render 'layouts/header' %>
+
+	<div class="col-sm-10 col-centered">
+    <%= render 'layouts/breadcrumbs' %>
+		<%= yield :header %>
+		<%= render 'layouts/messages' %>
+    <%= yield %>
+  </div>
+</div>
+
+</body>
+</html>

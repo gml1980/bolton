@@ -1,0 +1,13 @@
+<% unless errors.full_messages.blank? %>
+<div class="alert alert-warning alert-dismissible" role="alert">
+	<p><strong>Error details</strong></p>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<ul>
+  <% errors.full_messages.each do |msg| %>
+  <li>
+  	<%= msg %>
+  </li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

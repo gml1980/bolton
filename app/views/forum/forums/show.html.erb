@@ -1,0 +1,32 @@
+<% content_for :header do %>
+<h1>Forum: <%= @forum.name %></h1>
+<h2>Posts</h2>
+<% end %>
+
+<table class="table table-striped">
+	<tr>
+		<th>Subject</th>
+		<th>Posted</th>
+		<th>Replies</th>
+		<th>Last Reply</th>
+	</tr>
+
+	<% if @forum.forum_posts.count > 0 %>
+	  <% @forum.forum_posts.each do |post| %>
+			<tr>
+			  <td><%= link_to post.subject, forum_forum_post_path(post) %></td>
+				<td>TODO</td>
+				<td>TODO</td>
+				<td>TODO</td>
+			</tr>
+	  <% end %>
+  <% else %>
+			<tr>
+			  <td colspan="4">There are currently no posts in this Forum.</td>
+			</tr>
+  <% end %>
+</table>
+
+<% if @allowed_to_post %>
+  <%= link_to "Create New Post", new_forum_forum_post_path(:forum_id => @forum.id), :class => "btn btn-primary" %>
+<% end %>

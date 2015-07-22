@@ -1,0 +1,53 @@
+<% content_for :header do %>
+<h1>Forum Categories</h1>
+<% end %>
+
+<% if current_user.is_admin? %>
+	<% if @categories.size > 0 %>
+	<table class="table table-striped">
+		<tr>
+			<th>Category</th>
+			<th>Description</th>
+			<th>Position</th>
+			<th>Status</th>
+			<th>Actions</th>
+		</tr>
+
+		<% @categories.each do |cat| %>
+		<tr>
+			<td><%= link_to cat.name, forum_forum_category_path(cat) %></td>
+			<td><%= cat.description %></td>
+			<td><%= cat.position %></td>
+			<td><%= cat.status.humanize %></td>
+			<td><%= link_to "Edit", edit_forum_forum_category_path(cat) %></td>
+		</tr>
+		<% end %>
+	</table>
+	<% else %>
+	<p>No categories currently defined.</p>
+	<% end %>
+
+	<div>
+	<%= link_to "Create new category", new_forum_forum_category_path %>
+	</div>
+<% else %>
+	<% if @categories.size > 0 %>
+	<table class="table table-striped">
+		<tr>
+			<th>Category</th>
+			<th>Description</th>
+			<th>Forum Count</th>
+		</tr>
+
+		<% @categories.each do |cat| %>
+		<tr>
+			<td><%= link_to cat.name, forum_forum_category_path(cat) %></td>
+			<td><%= cat.description %></td>
+			<td><%= cat.forums.count %></td>
+		</tr>
+		<% end %>
+	</table>
+	<% else %>
+	<p>No categories currently defined.</p>
+	<% end %>
+<% end %>
