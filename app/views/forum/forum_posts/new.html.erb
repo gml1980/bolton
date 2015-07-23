@@ -3,7 +3,7 @@
 <h2>Post Message</h2>
 <% end %>
 
-<%= form_for @post do |f| %>
+<%= form_for @post, html: { multipart: true } do |f| %>
   <%= render 'shared/form_errors', :errors => @post.errors %>
 
   <%= f.hidden_field :forum_id, :value => @forum.id %>
@@ -34,6 +34,11 @@
 			<%= f.label :email_users, "Email site users to inform them of this post?" %>
 		</div>
 	<% end %>
+
+	<div class="form-group">
+		<%= f.label :file_attachment, "Attachments" %>
+	  <%= f.file_field :file_attachment %>
+	</div>
 
 	<div class="form-group">
 	<%= f.submit :class => "btn btn-primary form-control" %>

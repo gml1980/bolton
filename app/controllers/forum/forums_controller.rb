@@ -46,6 +46,7 @@ class Forum::ForumsController < ApplicationController
 			flash[:success] = "Forum created."
 			redirect_to @forum
 		else
+		  @categories = Forum::ForumCategory.all
 			flash[:error] = "Error creating forum."
 			render :new
 		end
