@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20150723121941) do
 
   create_table "file_attachments", force: true do |t|
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
+    t.string   "post_file_file_name"
+    t.string   "post_file_content_type"
+    t.integer  "post_file_file_size"
+    t.datetime "post_file_updated_at"
     t.text     "description"
     t.integer  "forum_post_id"
     t.integer  "forum_reply_id"

@@ -46,4 +46,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'breadcrumbs_on_rails'
 
-gem "paperclip", "~> 4.3"
+gem "paperclip"

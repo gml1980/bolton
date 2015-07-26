@@ -34,6 +34,10 @@ class Forum::ForumPostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
+      params[:forum_forum_post][:file_attachment].each do |posted_file|
+        @post.file_attachments.create(:post_file => posted_file)
+      end
+
       flash[:success] = "Post successful"
       redirect_to forum_forum_post_path(@post)
     else
@@ -45,6 +49,15 @@ class Forum::ForumPostsController < ApplicationController
   def update
     @post = Forum::ForumPost.find(params[:id])
     @post.update_attributes(allowed_params)
+
+    unless params[:forum_forum_post][:deleted_files].nil?
+      @post.file_attachments.where(:id => params[:forum_forum_post][:deleted_files]).destroy_all
+    end
+
+
+    params[:forum_forum_post][:file_attachment].each do |posted_file|
+      @post.file_attachments.create(:post_file => posted_file)
+    end
 
     if @post.save
       flash[:success] = "Update successful"

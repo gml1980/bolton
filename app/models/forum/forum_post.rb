@@ -3,7 +3,7 @@ class Forum::ForumPost < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :subject, :post_body, :forum
   has_many :forum_replies, class_name: 'Forum::ForumReply'
-  has_many :file_attachments
+  has_many :file_attachments, :dependent =>:destroy
 
   def posted_by
     if user.nil?

@@ -15,6 +15,18 @@
     <%= f.label :post_body %>
     <%= f.text_area :post_body, :class => "form-control", :rows => 10, :placeholder => "Write your post conents here" %>
   </div>
+
+  <% unless @post.file_attachments.size == 0 %>
+    <div class="form-group">
+      <%= collection_check_boxes(:forum_forum_post, :deleted_files, @post.file_attachments, :id, :post_file_file_name) %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :file_attachment, "Attachments" %>
+    <%= f.file_field :file_attachment, multiple: true %>
+  </div>
+
   <% if current_user.is_admin? %>
 
     <div class="form-group">

@@ -1,0 +1,2 @@
+Phones requesting using the wrong URL. (Case sensitive on the MAC address.)
+If hot-desking is disabled in the default version set - can break BI hot-desking, since the EP takes over (documented).
