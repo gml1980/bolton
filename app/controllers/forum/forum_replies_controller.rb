@@ -17,6 +17,7 @@ class Forum::ForumRepliesController < ApplicationController
     @reply.user = current_user
 
     if @reply.save
+      @post.touch
       flash[:success] = "Reply successful"
       redirect_to forum_forum_post_path(@post)
     else
@@ -42,6 +43,7 @@ class Forum::ForumRepliesController < ApplicationController
     @reply.update_attributes(allowed_params)
 
     if @reply.save
+      @reply.forum_post.touch
       flash[:success] = "Update successful"
       redirect_to forum_forum_post_path(@post)
     else

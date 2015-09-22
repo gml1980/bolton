@@ -1,4 +1,6 @@
 class Forum::ForumsController < ApplicationController
+  before_action :authenticate_user!
+
 	add_breadcrumb "Home", :root_path
   add_breadcrumb "Categories", :forum_forum_categories_path
 
@@ -26,13 +28,14 @@ class Forum::ForumsController < ApplicationController
 
 	def show
 		@forum = Forum::Forum.find(params[:id])
+    @posts = @forum.forum_posts.ordered.paginate(:page => params[:page], :per_page => 5)
 
   	@allowed_to_post = false
 
   	if is_admin?
-  		@allowed_to_post = !@forum.inactive?
+  		@allowed_to_post = @forum.active? || @forum.admin_only_posting?
   	elsif is_user?
-  		@allowed_to_post = (@forum.active? || @forum.admin_only_posting?)
+  		@allowed_to_post = @forum.active?
   	end
 
   	add_breadcrumb @forum.forum_category.name, @forum.forum_category

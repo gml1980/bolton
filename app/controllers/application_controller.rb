@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def is_admin?
-    current_user and current_user.is_admin?
+    return (current_user && current_user.is_admin?)
   end
 
   def is_user?
-    current_user and current_user.is_user?
+    return (current_user && current_user.is_user?)
   end
 end

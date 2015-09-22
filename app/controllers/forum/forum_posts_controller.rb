@@ -34,10 +34,13 @@ class Forum::ForumPostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      params[:forum_forum_post][:file_attachment].each do |posted_file|
-        @post.file_attachments.create(:post_file => posted_file)
+      unless params[:forum_forum_post][:file_attachment].nil?
+        params[:forum_forum_post][:file_attachment].each do |posted_file|
+          @post.file_attachments.create(:post_file => posted_file)
+        end
       end
 
+      @post.touch
       flash[:success] = "Post successful"
       redirect_to forum_forum_post_path(@post)
     else

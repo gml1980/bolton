@@ -47,3 +47,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'breadcrumbs_on_rails'
 
 gem "paperclip"
+
+gem 'will_paginate'

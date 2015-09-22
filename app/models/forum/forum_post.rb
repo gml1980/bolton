@@ -18,4 +18,11 @@ class Forum::ForumPost < ActiveRecord::Base
       forum_replies.latest_first.first.created_at
     end
   end
+
+  def last_updated_time
+  end
+
+  def self.ordered
+    Forum::ForumPost.order(updated_at: :desc)
+  end
 end
