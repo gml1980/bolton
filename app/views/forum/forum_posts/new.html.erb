@@ -17,7 +17,7 @@
 		<%= f.label :post_body %>
 		<%= f.text_area :post_body, :class => "form-control", :rows => 10, :placeholder => "Write your post conents here" %>
 	</div>
-	<% if current_user.is_admin? %>
+	<% if is_admin? %>
 
 		<div class="form-group">
 			<%= f.check_box :sticky %>

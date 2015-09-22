@@ -10,7 +10,7 @@
     <%= f.label :post_body, "Reply" %>
     <%= f.text_area :post_body, :class => "form-control", :rows => 10, :placeholder => "Write your reply here" %>
   </div>
-  <% if current_user.is_admin? %>
+  <% if is_admin? %>
     <div class="form-group">
       <%= f.check_box :email_users %>
       <%= f.label :email_users, "Email site users to inform them of this reply?" %>

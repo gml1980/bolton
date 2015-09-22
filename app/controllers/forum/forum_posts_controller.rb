@@ -54,9 +54,10 @@ class Forum::ForumPostsController < ApplicationController
       @post.file_attachments.where(:id => params[:forum_forum_post][:deleted_files]).destroy_all
     end
 
-
-    params[:forum_forum_post][:file_attachment].each do |posted_file|
-      @post.file_attachments.create(:post_file => posted_file)
+    unless params[:forum_forum_post][:file_attachment].nil?
+      params[:forum_forum_post][:file_attachment].each do |posted_file|
+        @post.file_attachments.create(:post_file => posted_file)
+      end
     end
 
     if @post.save

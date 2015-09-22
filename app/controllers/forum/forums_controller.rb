@@ -3,7 +3,7 @@ class Forum::ForumsController < ApplicationController
   add_breadcrumb "Categories", :forum_forum_categories_path
 
 	def index
-		if current_user.is_admin?
+		if is_admin?
 		  @forums = Forum::Forum.all.order(:position)
 		else
       @forums = Forum::Forum.all.user_viewable
@@ -29,9 +29,9 @@ class Forum::ForumsController < ApplicationController
 
   	@allowed_to_post = false
 
-  	if current_user.is_admin?
+  	if is_admin?
   		@allowed_to_post = !@forum.inactive?
-  	elsif current_user.user?
+  	elsif is_user?
   		@allowed_to_post = (@forum.active? || @forum.admin_only_posting?)
   	end
 

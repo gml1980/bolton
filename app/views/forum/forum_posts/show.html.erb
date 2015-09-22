@@ -15,15 +15,19 @@
         <li class="list-group-item">Updated <%= @post.updated_at %></li>
       <% end %>
 
-      <li class="list-group-item">Attachments</li>
-
-      <% if current_user.is_admin? || !@post.locked %>
+      <li class="list-group-item">Attachments
+        <% @post.file_attachments.each do |att| %><br>
+         <span class="glyphicon glyphicon-download" aria-hidden="true">
+         <%= link_to att.post_file_file_name, att.post_file.url(:original, false) %></span>
+        <% end %>
+      </li>
+      <% if is_admin? || !@post.locked %>
         <li class="list-group-item"><%= link_to "Reply", new_forum_forum_reply_path(:post_id => @post.id) %></li>
       <% else %>
         <li class="list-group-item">Post Locked</li>
       <% end %>
 
-      <% if current_user.is_admin? || (current_user && (@post.user == current_user)) %>
+      <% if is_admin? || (current_user && (@post.user == current_user)) %>
         <li class="list-group-item"><%= link_to "Edit Post", edit_forum_forum_post_path(@post) %></li>
       <% end %>
     </ul>

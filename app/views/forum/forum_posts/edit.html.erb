@@ -17,17 +17,18 @@
   </div>
 
   <% unless @post.file_attachments.size == 0 %>
+    <%= f.label "Remove Existing Attachments" %>
     <div class="form-group">
       <%= collection_check_boxes(:forum_forum_post, :deleted_files, @post.file_attachments, :id, :post_file_file_name) %>
     </div>
   <% end %>
 
   <div class="form-group">
-    <%= f.label :file_attachment, "Attachments" %>
+    <%= f.label :file_attachment, "Add Attachments" %>
     <%= f.file_field :file_attachment, multiple: true %>
   </div>
 
-  <% if current_user.is_admin? %>
+  <% if is_admin? %>
 
     <div class="form-group">
       <%= f.check_box :sticky %>
